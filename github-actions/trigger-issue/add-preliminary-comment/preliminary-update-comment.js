@@ -37,8 +37,8 @@ async function main({ g, c }, { shouldPost, issueNum }){
 
 function makeComment(){
   // Setting all the variables which formatcomment is to be called with
-  const issueAssignee = context.payload.issue.user.login
-
+  const issueAssignee = context.payload.issue.assignees
+  console.log(issueAssignee.length);
   const commentObject = {
     replacementString: issueAssignee,
     placeholderString: '${issueAssignee}',
