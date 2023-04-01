@@ -112,9 +112,9 @@ You can fork the hackforla/website repository by clicking <a href="https://githu
 <details>
   <summary><strong>Click here</strong> to see a visual example of the `fork` button within the website repo</summary>
   <p><strong>First, you find the `fork` button on the top right hand side of the [Hack for LA website repo](https://github.com/hackforla/website)</strong></h4>
-  <img src="https://user-images.githubusercontent.com/21162229/137044762-c80f18e8-b785-48fb-a286-81c1117c0178.jpg" />
+  <img src="https://user-images.githubusercontent.com/21162229/137044762-c80f18e8-b785-48fb-a286-81c1117c0178.jpg" >
   <p><strong>Next, a modal may open and request where you want to fork this website repo. Please click on your avatar or your GitHub username</strong></p>
-  <img src="https://user-images.githubusercontent.com/21162229/137045294-3d46b28c-edbb-410c-98f1-13940ecc5c5f.jpg" />
+  <img src="https://user-images.githubusercontent.com/21162229/137045294-3d46b28c-edbb-410c-98f1-13940ecc5c5f.jpg" >
 </details><br>
 
 **Note:** It should create a URL that looks like the following -> `https://github.com/<your_GitHub_user_name>/website`.
@@ -367,7 +367,7 @@ The best way to view the issues available is our [GitHub Project Board](https://
 <details>
   <summary><strong>Click here</strong> to see a Project Board visual</summary>
   <h4>Our GitHub project board</h4>
-  <img src="https://user-images.githubusercontent.com/21162229/137258967-93d1820e-7756-441a-9352-1e8a15a00e12.jpg"/>
+  <img src="https://user-images.githubusercontent.com/21162229/137258967-93d1820e-7756-441a-9352-1e8a15a00e12.jpg">
 </details>
 
 There are only 2 columns that you will be consistently referencing:
@@ -425,7 +425,7 @@ Once you find an issue you want to work on, you need to self-assign to claim it 
 <details>
   <summary><strong>Click here</strong> to see how you assign & unassign yourself to an issue</summary>
   <p><strong>Assign/Unassign demo</strong></p>
-  <img src="https://user-images.githubusercontent.com/21162229/137636320-e96ef70d-3c85-405e-90d2-ee7b3bba071f.gif" />
+  <img src="https://user-images.githubusercontent.com/21162229/137636320-e96ef70d-3c85-405e-90d2-ee7b3bba071f.gif" >
 </details>
 
 ##### **i. If you want to to self assign an issue:**
@@ -441,7 +441,7 @@ Once you find an issue you want to work on, you need to self-assign to claim it 
 <details>
   <summary><strong>Click here</strong> to see how to move an issue from the ‘Prioritized Backlog’ to the ‘In progress (actively working)’ & back</summary>
   <p><strong>Project Board column demo</strong></p>
-  <img src="https://user-images.githubusercontent.com/21162229/137693338-97fe5f6c-820d-41c9-8e93-57b70827e0cf.gif" />
+  <img src="https://user-images.githubusercontent.com/21162229/137693338-97fe5f6c-820d-41c9-8e93-57b70827e0cf.gif" >
 </details>
 
 ##### **i. After you claim an issue:**
@@ -521,7 +521,7 @@ You can also sync your fork directly on GitHub by clicking "Sync Fork" at the ri
 
 <details>
   <summary><strong>Click here</strong> to see how to sync the fork on GitHub</summary>
-  <img src="https://docs.github.com/assets/cb-49937/images/help/repository/update-branch-button.png" />
+  <img src="https://docs.github.com/assets/cb-49937/images/help/repository/update-branch-button.png" >
 </details>
 
 <sub>[Back to Table of Contents](#table-of-contents)</sub>
@@ -623,7 +623,7 @@ You can also sync your fork directly on GitHub by clicking "Sync Fork" at the ri
 
 <details>
   <summary><strong>Click here</strong> to see how to sync the fork on GitHub</summary>
-  <img src="https://docs.github.com/assets/cb-49937/images/help/repository/update-branch-button.png" />
+  <img src="https://docs.github.com/assets/cb-49937/images/help/repository/update-branch-button.png" >
 </details>
 
 
@@ -732,7 +732,7 @@ git push --set-upstream origin update-give-link-2093
 
 <details>
   <summary><strong>Click here</strong> to see a notification for a pull request</summary>
-  <img src="https://user-images.githubusercontent.com/21162229/137709888-77ccfd63-3921-4978-9fc0-6fbd703683b8.jpg" />
+  <img src="https://user-images.githubusercontent.com/21162229/137709888-77ccfd63-3921-4978-9fc0-6fbd703683b8.jpg" >
 </details>
 <br>
 <details>
@@ -748,7 +748,7 @@ git push --set-upstream origin update-give-link-2093
   -
 
   ### Screenshots of Proposed Changes Of The Website  (if any, please do not screen shot code changes)
-  <!-- Note, if your images are too big, use the <img src="" width="" length="" />  syntax instead of ![image](link) to format the images -->
+  <!-- Note, if your images are too big, use the <img src="" width="" length="" >  syntax instead of ![image](link) to format the images -->
   <!-- If images are not loading properly, you might need to double check the syntax or add a newline after the closing </summary> tag -->
 
   <details>
@@ -769,7 +769,7 @@ git push --set-upstream origin update-give-link-2093
 <br>
 <details>
   <summary><strong>Click here</strong> to see pull request #2131 example (gif)</summary>
-  <img src="https://media.giphy.com/media/WT7SDqqKLWnjC1ppHV/giphy-downsized-large.gif" />
+  <img src="https://media.giphy.com/media/WT7SDqqKLWnjC1ppHV/giphy-downsized-large.gif" >
 </details>
 <br>
 
@@ -822,7 +822,7 @@ in the gif example [near the top  of this part within the gif of completing pull
 
 ```
 ### Screenshots of Proposed Changes Of The Website  (if any, please do not screen shot code changes)
-<!-- Note, if your images are too big, use the <img src="" width="" length="" />  syntax instead of ![image](link) to format the images -->
+<!-- Note, if your images are too big, use the <img src="" width="" length="" >  syntax instead of ![image](link) to format the images -->
 <!-- If images are not loading properly, you might need to double check the syntax or add a newline after the closing </summary> tag -->
 
 <details>
@@ -857,7 +857,7 @@ After you have submitted your pull request, add it to the project board by click
 <details>
   <summary><strong>Click here</strong> to see how to add a pull request to the project board</summary>
   <h4>Our GitHub project board</h4>
-  <img src="https://user-images.githubusercontent.com/81049661/161181526-23ae511c-e991-4cc6-a0a4-d8db19dd69ca.png"/>
+  <img src="https://user-images.githubusercontent.com/81049661/161181526-23ae511c-e991-4cc6-a0a4-d8db19dd69ca.png">
 </details>
 
 ##### **vi. After pull request is submitted/merged**
@@ -904,7 +904,7 @@ The best way to ask for help and provide as much information to the team is to d
 
 <details>
   <summary><strong>Click here</strong> for visual comment example</summary>
-  <img src="https://user-images.githubusercontent.com/21162229/137784250-96281332-9231-4c5d-aba2-0d4c36521b82.jpg" alt="Making a comment visual example" />
+  <img src="https://user-images.githubusercontent.com/21162229/137784250-96281332-9231-4c5d-aba2-0d4c36521b82.jpg" alt="Making a comment visual example" >
 </details>
 
 1. Write down your blocker as a comment within your issue
@@ -913,7 +913,7 @@ The best way to ask for help and provide as much information to the team is to d
 
 <details>
   <summary><strong>Click here</strong> to see how to copy a link that goes to an issue comment</summary>
-  <img src="https://user-images.githubusercontent.com/21162229/137784791-30871703-48de-4836-91ef-1268d86662a4.jpg" alt="Visual example of how to copy the comment link" />
+  <img src="https://user-images.githubusercontent.com/21162229/137784791-30871703-48de-4836-91ef-1268d86662a4.jpg" alt="Visual example of how to copy the comment link" >
 </details>
 
 1. Click on the ellipsis (...) at the top right of the comment box
