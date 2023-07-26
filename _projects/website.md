@@ -1,9 +1,9 @@
 ---
 identification: '130000551'
-title: Hackforla.org Website
-description: The hackforla.org website is our organization's way of communicating with volunteers, stakeholders, and donors. This project is a good place to start for new volunteers looking to polish their git protocol skills (branches, separation of concerns, etc.). We currently have two development paths&#58; growth (building out new pages and guides) and optimization (taking inventory of our code and design systems) to ensure we are consistently delivering value to our users while being scalable in our approach to building the site.
+title: Hack for LA Site
+description: The Hack for LA Site (hackforla.org) is our organization's way of communicating with volunteers, stakeholders, and donors. This project is a good place to start for new volunteers looking to polish their git protocol skills (branches, separation of concerns, etc.). We currently have two development paths&#58; growth (building out new pages and guides) and optimization (taking inventory of our code and design systems) to ensure we are consistently delivering value to our users while being scalable in our approach to building the site.
 image: /assets/images/projects/website.png
-alt: 'Hackforla.org Website'
+alt: 'Hack for LA Site'
 image-hero: /assets/images/projects/website-hero.jpg
 leadership:
   - name: Bonnie Wolfe
@@ -18,24 +18,6 @@ leadership:
       slack: 'https://hackforla.slack.com/team/U02M686LYET'
       github: 'https://github.com/blulady'
     picture: https://avatars.githubusercontent.com/blulady
-  - name: Arpita Pandya
-    role: Merge Team
-    links:
-      slack: 'https://hackforla.slack.com/team/U02LQ20MEDU'
-      github: 'https://github.com/arpitapandya'
-    picture: https://avatars.githubusercontent.com/arpitapandya
-  - name: Justin Dingeman
-    role: Technical Lead
-    links:
-      slack: 'https://hackforla.slack.com/team/U03P33YE2PQ'
-      github: 'https://github.com/jdingeman'
-    picture: https://avatars.githubusercontent.com/jdingeman
-  - name: Matt Pereira
-    role: Merge Team
-    links:
-      slack: 'https://hackforla.slack.com/team/U045XKKB5DH'
-      github: 'https://github.com/MattPereira'
-    picture: https://avatars.githubusercontent.com/MattPereira
   - name: Phillip Sanchez
     role: Merge Team
     links:
@@ -66,13 +48,30 @@ leadership:
       slack: 'https://hackforla.slack.com/team/U04J1GBA6QP'
       github: 'https://github.com/christinaor'
     picture: https://avatars.githubusercontent.com/christinaor
-  - name: Bitian Zhang
+  - name: MJ Shelton
     role: Merge Team
     links:
-      slack: 'https://hackforla.slack.com/team/U04H6PYK14N'
-      github: 'https://github.com/bzzz-coding'
-    picture: https://avatars.githubusercontent.com/bzzz-coding
-    
+      slack: https://hackforla.slack.com/team/U04UG4UQE8G
+      github: https://github.com/mjshelton12
+    picture: https://avatars.githubusercontent.com/mjshelton12
+  - name: Chris Menke
+    role: Merge Team
+    links:
+      slack: https://hackforla.slack.com/team/U04KVG05H3J
+      github: https://github.com/chrismenke45
+    picture: https://avatars.githubusercontent.com/chrismenke45
+  - name: Drake Nguyen
+    role: Merge Team
+    links:
+      slack: https://hackforla.slack.com/team/U04TSESVB4J
+      github: https://github.com/drakenguyen4000
+    picture: https://avatars.githubusercontent.com/drakenguyen4000
+  - name: Ren Demeis-Ortiz
+    role: Merge Team
+    links:
+      slack: https://hackforla.slack.com/team/U059K7A1VFB
+      github: https://github.com/LRenDO
+    picture: https://avatars.githubusercontent.com/LRenDO
 links:
   - name: Wiki
     url: 'https://github.com/hackforla/website/wiki'

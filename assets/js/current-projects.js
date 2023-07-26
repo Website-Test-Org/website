@@ -37,11 +37,31 @@ document.addEventListener("DOMContentLoaded",function(){
                 filterTitle = filterName
             }
             document.querySelector('.filter-list').insertAdjacentHTML( 'beforeend', dropDownFilterComponent( filterName,filterValue,filterTitle) );
+            if (document.getElementById(filterName).getElementsByTagName("li").length > 8) {
+                document.getElementById(filterName).insertAdjacentHTML( 'beforeend', `<li class="view-all" tabindex="0" role="button" aria-label="View All ${filterTitle} Filters">View all</li>` );
+            }
         }
 
         document.querySelectorAll("input[type='checkbox']").forEach(item =>{
             item.addEventListener('change', checkBoxEventHandler)
         });
+
+        document.querySelectorAll("li.view-all").forEach(viewAll => {
+            viewAll.addEventListener("click", viewAllEventHandler)
+        })
+
+        document.querySelectorAll(".labelArrow").forEach(arrow => {
+            arrow.addEventListener("click", showNoneEventHandler)
+        })
+
+        document.querySelectorAll(".show-filters-button").forEach(button => {
+            button.addEventListener("click", showFiltersEventHandler)
+        })
+        document.querySelectorAll(".hide-filters-button").forEach(button => {
+            button.addEventListener("click", hideFiltersEventHandler)
+        })
+        document.querySelector(".cancel-mobile-filters").addEventListener("click", cancelMobileFiltersEventHandler)
+        document.addEventListener('keydown', tabFocusedKeyDownHandler);
 
         // Update UI on page load based on url parameters
         updateUI()
@@ -98,7 +118,7 @@ function retrieveProjectDataFromCollection(){
                             "partner": `{{ project.partner }}`
                             {%- endif -%}
                             {%- if project.tools -%},
-                            "tools": `{{ project.tools }}`
+                            "tools": {{ project.tools | jsonify }}
                             {%- endif -%}
                             {%- if project.looking -%},
                             "looking": {{ project.looking | jsonify }}
@@ -191,6 +211,34 @@ function checkBoxEventHandler(){
     //Update URL parameters
     window.history.replaceState(null, '', `?${queryString}`);
 }
+//shows all filters for a category
+function viewAllEventHandler(e) {
+    e.target.parentNode.classList.add("show-all")
+}
+//event handler for keyboard users to click spans when focused
+function tabFocusedKeyDownHandler(e) {
+    // if user is using tab index and keys space or enter on item that needs to be clicked, it will be clicked
+	if ((event.key === "Enter" || event.key === "Spacebar" || event.key === " ") && document.activeElement.getAttribute("aria-label")) {
+        document.activeElement.click()
+    }
+}
+//hides all filters in a category (unless in mobile view, then this shows all, because mobile default is show none)
+function showNoneEventHandler(e) {
+    e.target.parentNode.classList.toggle("show-none")
+}
+// shows filters popup on moble
+function showFiltersEventHandler(e) {
+    document.querySelector(".filter-toolbar").classList.add("show-filters")
+}
+// hides filters popup on moble
+function hideFiltersEventHandler(e) {
+    document.querySelector(".filter-toolbar").classList.remove("show-filters")
+}
+// cancel button on mobile filters
+function cancelMobileFiltersEventHandler(e) {
+    hideFiltersEventHandler(e)
+    clearAllEventHandler()
+}
 
 /**
  * The updateUI function updates the ui based on the url parameters during the following events
@@ -269,14 +317,16 @@ function updateFilterFrequency(){
     /**
      * Filters listed in the url parameter are checked or unchecked based on filter params
  */
-function updateCheckBoxState(filterParams){
-    document.querySelectorAll("input[type='checkbox']").forEach(checkBox =>{
-        if(checkBox.name in filterParams){
-            let args = filterParams[checkBox.name]
-            args.includes(checkBox.id) ? checkBox.checked = true : checkBox.checked = false;
-        }
-    })
-}
+    function updateCheckBoxState(filterParams){
+        document.querySelectorAll("input[type='checkbox']").forEach((checkBox) => {
+          if (checkBox.name in filterParams){ 
+            let args = filterParams[checkBox.name];
+            checkBox.checked = args.includes(checkBox.id);
+          } else {
+            checkBox.checked = false;
+          }
+        });
+      }
 
     /**
      * Update category counter based on filter params
@@ -323,6 +373,7 @@ function updateProjectCardDisplayState(filterParams){
 function updateFilterTagDisplayState(filterParams){
     // Clear all filter tags
     document.querySelectorAll('.filter-tag').forEach(filterTag => filterTag.parentNode.removeChild(filterTag) );
+    document.querySelectorAll('.applied-filters').forEach(appliedFilters => appliedFilters.parentNode.removeChild(appliedFilters) );
 
     //Filter tags display hide logic
     for(const [key,value] of Object.entries(filterParams)){
@@ -331,6 +382,10 @@ function updateFilterTagDisplayState(filterParams){
 
         })
 
+    }
+
+    if (Object.entries(filterParams). length > 0) {
+        document.querySelector('.filter-tag-container').insertAdjacentHTML('afterbegin', `<h4 class="applied-filters">Applied Filters</h4>`)
     }
 }
 
@@ -347,7 +402,7 @@ function attachEventListenerToFilterTags(){
 
         // If there exist a filter-tag button on the page add a clear all button after the last filter tag button
         if(!document.querySelector('.clear-filter-tags')){
-            document.querySelector('.filter-tag:last-of-type').insertAdjacentHTML('afterend',`<a class="clear-filter-tags" style="white-space: nowrap;">Clear All</a>`);
+            document.querySelector('.filter-tag:last-of-type').insertAdjacentHTML('afterend',`<a class="clear-filter-tags" tabindex="0" aria-label="Clear All Filters" style="white-space: nowrap;">Clear All</a>`);
 
             //Attach an event handler to the clear all button
             document.querySelector('.clear-filter-tags').addEventListener('click',clearAllEventHandler);
@@ -423,94 +478,97 @@ function clearAllEventHandler(){
  * Takes a single project object and returns the html string representing the project card
 */
 function projectCardComponent(project){
-return `
-        <li class="project-card" id="${ project.identification }"
-            data-status="${project.status}"
-            data-looking="${project.looking ? [... new Set(project.looking.map(looking => looking.category)) ] : ''}"
-            data-technologies="${(project.technologies && project.languages) ? [... new Set(project.technologies.map(tech => tech)), project.languages.map(lang => lang)] : '' }"
+    return `
+            <li class="project-card" id="${ project.identification }"
+                data-status="${project.status}"
+                data-looking="${project.looking ? [... new Set(project.looking.map(looking => looking.category)) ] : ''}"
+                data-technologies="${(project.technologies && project.languages) ? [... new Set(project.technologies.map(tech => tech)), project.languages.map(lang => lang)] : project.languages.map(lang => lang) }"
+                
+		data-location="${project.location? project.location.map(city => city) : '' }"
+                data-programs="${project.programAreas ? project.programAreas.map(programArea => programArea) : '' }"
+            >
+            <div class="project-card-inner">
 
-            data-location="${project.location? project.location.map(city => city) : '' }"
-            data-programs="${project.programAreas ? project.programAreas.map(programArea => programArea) : '' }"
-        >
-        <div class="project-card-inner">
+            <a href='${project.id}'>
+                <div class="project-tmb">
+                <img src='${window.location.origin}${project.image}' class="project-tmb-img" alt='${project.alt}'/>
+                </div>
+            </a>
 
-        <a href='${project.id}'>
-            <div class="project-tmb">
-            <img src='${window.location.origin}${project.image}' class="project-tmb-img" alt='${project.alt}'/>
-            </div>
-        </a>
+            <div class="project-body">
+                <div class='status-indicator status-${project.status}'>
+                <h5 class='status-text'>${ project.status }</h5>
+                </div>
 
-        <div class="project-body">
-            <div class='status-indicator status-${project.status}'>
-            <h5 class='status-text'>${ project.status }</h5>
-            </div>
+                <a href='${ project.id }'><h4 class="project-title">${ project.title }</h4></a>
 
-            <a href='${ project.id }'><h4 class="project-title">${ project.title }</h4></a>
+                <p class="project-description">${ project.description }</p>
 
-            <p class="project-description">${ project.description }</p>
+                <div class="project-links">
+                <strong>Links: </strong>
+                ${project.links.map(item => `<a href="${ item.url }" rel="noopener" target='_blank'> ${ item.name }</a>`).join(", ")}
+                </div>
 
-            <div class="project-links">
-            <strong>Links: </strong>
-            ${project.links.map(item => `<a href="${ item.url }" rel="noopener" target='_blank'> ${ item.name }</a>`).join(", ")}
-            </div>
+                ${project.partner ?
+                `
+                <div class="project-partner">
+                <strong>Partner: </strong>
+                ${ project.partner }
+                </div>
+                `:""
+                }
 
-            ${project.partner ?
-            `
-            <div class="project-partner">
-            <strong>Partner: </strong>
-            ${ project.partner }
-            </div>
-            `:""
-            }
+                ${project.tools ?
+                `
+                <div class="project-tools">
+                <strong>Tools: </strong>
+                ${(Array.isArray(project.tools) ? project.tools : project.tools.split(','))
+                    .map(tool => `<p class='project-card-field-inline'> ${tool}</p>`)
+                    .join(", ")
+                }
+                </div>
+                `: ""
+                }
 
-            ${project.tools ?
-            `
-            <div class="project-tools">
-            <strong>Tools: </strong>
-            ${ project.tools }
-            </div>
-            `:""
-            }
+                ${project.looking ? "" : ""
+                // `
+                // <div class="project-needs">
+                //     <strong>Looking for: </strong>
+                //     ${project.looking.map( role => `<p class='project-card-field-inline'> ${ role.skill }</p>`).join(", ")}
+                // </div>
+                // `:""
+                // ^ See issue #1997 for more info on why this is commented out
+                }
 
-            ${project.looking ? "" : ""
-            // `
-            // <div class="project-needs">
-            //     <strong>Looking for: </strong>
-            //     ${project.looking.map( role => `<p class='project-card-field-inline'> ${ role.skill }</p>`).join(", ")}
-            // </div>
-            // `:""
-            // ^ See issue #1997 for more info on why this is commented out
-            }
+                ${project.languages?.length > 0 ? 
+                `
+                <div class="project-languages">
+                <strong>Languages: </strong>
+                ${project.languages.map(language => `<p class='project-card-field-inline'> ${ language }</p>`).join(", ")}
+                </div>
+                `: ""
+                }
 
-            ${project.languages?.length > 0 ? 
-            `
-            <div class="project-languages">
-            <strong>Languages: </strong>
-            ${project.languages.map(language => `<p class='project-card-field-inline'> ${ language }</p>`).join(", ")}
-            </div>
-            `: ""
-            }
+                ${project.technologies ?
+                `
+                <div class="project-technologies">
+                <strong>Technologies: </strong>
+                ${project.technologies.map(tech => `<p class='project-card-field-inline'> ${ tech }</p>`).join(", ")}
+                </div>
+                `:""
+                }
 
-            ${project.technologies ?
-            `
-            <div class="project-technologies">
-            <strong>Technologies: </strong>
-            ${project.technologies.map(tech => `<p class='project-card-field-inline'> ${ tech }</p>`).join(", ")}
-            </div>
-            `:""
-            }
-
-            ${project.programAreas ?
-            `
-            <div class="project-programs">
-            <strong>Program Areas: </strong>
-            ${project.programAreas.map(programArea => `<p class='project-card-field-inline'> ${ programArea }</p>`).join(", ")}
-            </div>
-            `:""
-            }
-</div>
-</div>
-</li>`
+                ${project.programAreas ?
+                `
+                <div class="project-programs">
+                <strong>Program Areas: </strong>
+                ${project.programAreas.map(programArea => `<p class='project-card-field-inline'> ${ programArea }</p>`).join(", ")}
+                </div>
+                `:""
+                }
+    </div>
+    </div>
+    </li>`
 }
 
 /**
@@ -522,7 +580,7 @@ function dropDownFilterComponent(categoryName,filterArray,filterTitle){
     <a class='category-title' style='text-transform: capitalize;'>
         ${filterTitle}
         <span id='counter_${categoryName}' class='number-of-checked-boxes'></span>
-        <span class='labelArrow'> ∟ </span>
+        <span class='labelArrow' tabindex="0" role="button" aria-label="Toggle Show ${filterTitle} Filters"> ∟ </span>
     </a>
     <ul class='dropdown' id='${categoryName.toLowerCase()}'>
         ${filterArray.map(item =>
@@ -548,7 +606,7 @@ function filterTagComponent(filterName,filterValue){
                 data-filter='${filterName},${filterValue}'
                 class='filter-tag'
             >
-                <span>
+                <span tabindex="0" role="button" aria-label="Remove ${filterValue} Filter">
                 ${filterName === "looking" ? "Role" : filterName}: ${filterValue}
                 </span>
             </div>`
